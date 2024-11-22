@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+<head>
+    <meta charset="UTF-8">
+    <title>וילה בוקסטר - נופש גלילי</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --accent-color: #E67E22;
+            --text-light: #ECF0F1;
+            --text-dark: #2C3E50;
+            --background-light: #F9FAFB;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .back-to-home {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background: rgba(0,0,0,0.05);
+            transform: translateX(-5px);
+        }
+
+        .back-to-home::before {
+            content: '←';
+            font-size: 1.2rem;
+        }
+
+        .hero-villa {
+            height: 80vh;
+            background-image: url('https://www.vila4u.com/gallery/thumb/1000/1674639860301779.jpeg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 40px;
+        }
+
+        .hero-overlay h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .hero-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            right: 0;
+        }
+
+        .attractions-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .attraction-item {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .attraction-item:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        .attraction-item h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+        }
+
+        .map-section {
+            height: 400px;
+            background: #eee;
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .price-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .price-table th,
+        .price-table td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .contact-section {
+            text-align: center;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .contact-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .hero-overlay h1 {
+                font-size: 2rem;
+            }
+
+            .hero-details {
+                font-size: 1rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/nofeshglililogo.jpg" alt="נופש גלילי" class="logo">
+        </div>
+        <a href="./NofesGlili.html" class="back-to-home">חזרה לדף הבית</a>
+    </nav>
+
+    <div class="hero-villa">
+        <div class="hero-overlay" data-aos="fade-up">
+            <h1>וילה בוקסטר</h1>
+            <div class="hero-details">
+                <span>4 חדרי שינה</span>
+                <span>•</span>
+                <span>בריכה מחוממת</span>
+                <span>•</span>
+                <span>ג'קוזי ספא</span>
+                <span>•</span>
+                <span>עד 16 אורחים</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="intro-section" data-aos="fade-up">
+            <h2>על הוילה</h2>
+            <p>וילה מפוארת במושבה מגדל, המציעה חוויית אירוח יוקרתית עם נוף מרהיב לכנרת. הוילה מציעה שילוב מושלם של יוקרה, נוחות ופרטיות.</p>
+        </section>
+
+        <section class="gallery" data-aos="fade-up"></section>
+
+        <section class="features-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <h3>בריכה וספא</h3>
+                <ul class="feature-list">
+                    <li>בריכת שחייה מחוממת (12X4 מטר)</li>
+                    <li>טמפרטורה קבועה של 33 מעלות</li>
+                    <li>ג'קוזי ספא ל-6 אנשים (40 מעלות)</li>
+                    <li>פינות שיזוף מרווחות</li>
+                    <li>נוף פנורמי לכנרת</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>חדרי שינה</h3>
+                <ul class="feature-list">
+                    <li>4 חדרי שינה מפוארים</li>
+                    <li>חדר רחצה פרטי בכל חדר</li>
+                    <li>מיטות קומותיים בחלק מהחדרים</li>
+                    <li>לינה עד 16 אורחים</li>
+                    <li>סלון מרווח עם מערכת קולנוע</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>מטבח ואבזור</h3>
+                <ul class="feature-list">
+                    <li>2 מקררים</li>
+                    <li>מדיח כלים</li>
+                    <li>תמי 4</li>
+                    <li>פינת אוכל ל-12 סועדים</li>
+                    <li>מטבח חיצוני עם עמדת מנגל</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>לציבור הדתי</h3>
+                <ul class="feature-list">
+                    <li>בית כנסת במרחק הליכה</li>
+                    <li>פלטה ומיחם</li>
+                    <li>שעון שבת</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="attractions-section" data-aos="fade-up">
+            <h2>אטרקציות באזור</h2>
+            <div class="attractions-grid">
+                <div class="attraction-item">
+                    <h4>חלום עולמי ספורט ימי</h4>
+                    <p>אטרקציות ימיות מגוונות בכנרת</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>חמי טבריה</h4>
+                    <p>מעיינות חמים ובריכות מרפא</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>חוף בורה בורה</h4>
+                    <p>חוף מרהיב עם מגוון פעילויות</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>שטח גלילי טרקטורונים</h4>
+                    <p>טיולי טרקטורונים מודרכים</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section" data-aos="fade-up">
+            <iframe 
+                width="100%" 
+                height="100%" 
+                frameborder="0" 
+                scrolling="no" 
+                marginheight="0" 
+                marginwidth="0" 
+                src="https://maps.google.com/maps?q=32°50'22.1%22N+35°29'59.7%22E&t=&z=13&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </section>
+
+        <section class="price-section" data-aos="fade-up">
+            <h2>מחירים</h2>
+            <table class="price-table">
+                <tr>
+                    <th>תקופה</th>
+                    <th>מחיר ללילה</th>
+                </tr>
+                <tr>
+                    <td>אמצע שבוע</td>
+                    <td>3,000 ₪</td>
+                </tr>
+                <tr>
+                    <td>סופ"ש</td>
+                    <td>4,500 ₪</td>
+                </tr>
+            </table>
+            <p>* המחיר הסופי ייקבע לפי כמות האורחים וכמות הלילות</p>
+            <p>* ישנה הנחה בהזמנת 2 לילות בסופ"ש</p>
+        </section>
+
+        <section class="contact-section" data-aos="fade-up">
+            <h2>מעוניינים להזמין?</h2>
+            <a href="tel:0504488353" class="contact-button">להזמנות: 050-448-8353</a>
+            <a href="tel:0527464618" class="contact-button">מנהלת האתר: 052-746-4618</a>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Gallery images array
+        const galleryImages = [
+            '1674639923866101',
+            '1674639923867157',
+            '1674639923868723',
+            '1674639923869129',
+            '1674639923869404',
+            '1674639923870252',
+            '1674639923871194',
+            '1674639923872936',
+            '1674639923873858',
+            '1674639923874075',
+            '1674639923874479',
+            '1674639860301779',
+            '1674639860301358',
+            '1674639860302173',
+            '1674639860303498'
+        ];
+
+        // Create gallery items
+        const galleryContainer = document.querySelector('.gallery');
+        galleryImages.forEach(imageId => {
+            const imageUrl = `https://www.vila4u.com/gallery/thumb/1000/${imageId}.jpeg`;
+            const galleryItem = document.createElement('a');
+            galleryItem.href = imageUrl;
+            galleryItem.classList.add('gallery-item');
+            galleryItem.setAttribute('data-gallery', 'villa-gallery');
+            galleryItem.innerHTML = `<img src="${imageUrl}" alt="וילה בוקסטר">`;
+            galleryContainer.appendChild(galleryItem);
+        });
+
+        // Initialize GLightbox
+        const lightbox = GLightbox({
+            selector: '[data-gallery]',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true,
+            zoomable: true,
+            draggable: true,
+            openEffect: 'fade',
+            closeEffect: 'fade'
+        });
+    </script>
+</body>
+</html>
