@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>נופש גלילי - וילות יוקרה צופות כנרת</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <style>
@@ -21,16 +22,44 @@
             background: var(--background-light);
             color: var(--text-dark);
             line-height: 1.6;
-            padding-bottom: 60px;
+            padding-bottom: 120px;
         }
 
         .logo {
-            height: 60px;
+            height: 40px;
             transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .logo {
+                height: 60px;
+            }
         }
 
         .logo:hover {
             transform: scale(1.05);
+        }
+
+        .hero {
+            height: 70vh;
+            background-image: url('https://www.vila4u.com/gallery/thumb/1000/1674639778716683.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: scroll;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            margin-top: 60px;
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                height: 90vh;
+                background-attachment: fixed;
+            }
         }
 
         .hero::before {
@@ -51,7 +80,7 @@
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 2.5rem;
             margin-bottom: 0.5rem;
             opacity: 0;
             transform: translateY(20px);
@@ -59,12 +88,22 @@
         }
 
         .hero h2 {
-            font-size: 2rem;
+            font-size: 1.5rem;
             font-weight: 300;
             margin-bottom: 2rem;
             opacity: 0;
             transform: translateY(20px);
             animation: fadeInUp 1s 0.3s forwards;
+        }
+
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 4rem;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
         }
 
         @keyframes fadeInUp {
@@ -77,25 +116,34 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 20px;
         }
 
         .intro-section {
             text-align: center;
-            margin: 40px 0;
+            margin: 20px 0;
         }
 
         .intro-section p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
+            padding: 0 15px;
         }
 
         .villas-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (min-width: 768px) {
+            .villas-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 40px;
+            }
         }
 
         .villa-card {
@@ -113,9 +161,15 @@
         }
 
         .villa-image {
-            height: 250px;
+            height: 200px;
             overflow: hidden;
             position: relative;
+        }
+
+        @media (min-width: 768px) {
+            .villa-image {
+                height: 250px;
+            }
         }
 
         .villa-image::after {
@@ -213,57 +267,6 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
-        .contact-bar {
-            background: var(--primary-color);
-            color: var(--text-light);
-            padding: 15px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .contact-bar a {
-            color: var(--text-light);
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-bar a:hover {
-            color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .owner-section {
-            background: white;
-            padding: 60px 20px;
-            margin-top: 60px;
-            text-align: center;
-        }
-
-        .owner-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .owner-content h2 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .owner-content p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #555;
-        }
-
         .navbar {
             position: fixed;
             top: 0;
@@ -282,11 +285,6 @@
         .logo-container {
             flex-grow: 1;
             text-align: center;
-        }
-
-        .logo {
-            height: 60px;
-            transition: transform 0.3s ease;
         }
 
         .hamburger {
@@ -340,7 +338,8 @@
             position: fixed;
             top: 0;
             right: -100%;
-            width: 300px;
+            width: 80%;
+            max-width: 300px;
             height: 100vh;
             background: white;
             box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
@@ -367,7 +366,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 15px;
+            padding: 12px 15px;
             color: var(--text-dark);
             text-decoration: none;
             font-size: 1.2rem;
@@ -403,21 +402,97 @@
             visibility: visible;
         }
 
-        .hero {
-            height: 90vh;
-            background-image: url('https://www.vila4u.com/gallery/thumb/1000/1674639778716683.jpeg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .owner-section {
+            background: white;
+            padding: 60px 20px;
+            margin-top: 60px;
             text-align: center;
-            color: var(--text-light);
-            margin-top: 80px;
         }
 
+        .owner-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .owner-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .owner-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .contact-bar {
+            background: var(--primary-color);
+            color: var(--text-light);
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 100;
+        }
+
+        @media (max-width: 767px) {
+            .contact-bar {
+                padding: 0;
+            }
+
+            .contact-bar.expanded {
+                padding: 15px 0;
+            }
+
+            .contact-bar .mobile-label {
+                display: block;
+                padding: 12px;
+                background: var(--primary-color);
+                color: var(--text-light);
+                cursor: pointer;
+            }
+
+            .contact-links {
+                display: none;
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 0;
+            }
+
+            .contact-bar.expanded .contact-links {
+                display: flex;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .contact-bar .mobile-label {
+                display: none;
+            }
+
+            .contact-links {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                gap: 30px;
+            }
+        }
+
+        .contact-bar a {
+            color: var(--text-light);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+        }
+
+        .contact-bar a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 
@@ -459,7 +534,8 @@
         </section>
 
         <section class="villas-grid">
-            <!-- וילה בוקסטר -->
+            <!-- וילה בוקסטר
+                <!-- וילה בוקסטר -->
             <article class="villa-card" data-aos="fade-up">
                 <div class="villa-image">
                     <img src="https://www.vila4u.com/gallery/thumb/1000/1674639778716683.jpeg" alt="וילה בוקסטר">
@@ -511,6 +587,7 @@
                 </div>
             </article>
         </section>
+
         <section class="owner-section" data-aos="fade-up">
             <div class="owner-content">
                 <h2>מי אנחנו?</h2>
@@ -521,9 +598,14 @@
         </section>
     </div>
 
+
     <div class="contact-bar">
-        <a href="tel:0504488353">📞 להזמנות: 050-448-8353</a>
-        <a href="tel:0527464618">📱 מנהלת האתר: 052-746-4618</a>
+        <div class="mobile-label">להזמנות</div>
+        <div class="contact-links">
+            <a href="https://wa.me/972504488353">📱 להזמנות בוואטסאפ: 050-448-8353</a>
+            <a href="tel:0504488353">📞 להזמנות בטלפון: 050-448-8353</a>
+            <a href="https://wa.me/972527464618">👩‍💼 מנהלת האתר בוואטסאפ: 052-746-4618</a>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
@@ -548,6 +630,24 @@
 
         hamburger.addEventListener('click', toggleMenu);
         backdrop.addEventListener('click', toggleMenu);
+
+        document.querySelector('.mobile-label').addEventListener('click', function () {
+            document.querySelector('.contact-bar').classList.toggle('expanded');
+        });
+
+        // Close the expanded menu when clicking outside
+        document.addEventListener('click', function (event) {
+            const contactBar = document.querySelector('.contact-bar');
+            const mobileLabel = document.querySelector('.mobile-label');
+
+            if (!contactBar.contains(event.target) || event.target === mobileLabel) {
+                return;
+            }
+
+            if (contactBar.classList.contains('expanded')) {
+                contactBar.classList.remove('expanded');
+            }
+        });
     </script>
 </body>
 
