@@ -554,6 +554,68 @@
             color: var(--accent-color);
             transform: translateY(-2px);
         }
+
+        .menu-overlay {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .faq-list.active {
+            display: block;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .menu-items {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu-items li a {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .menu-items li a:hover {
+            background-color: #f5f5f5;
+        }
+
+        .menu-items span {
+            margin-left: 8px;
+        }
     </style>
 </head>
 
@@ -572,11 +634,49 @@
 
     <div class="menu-overlay">
         <ul class="menu-items">
-            <li><a href="#"><span>🎯</span> איפה מבלים?</a></li>
-            <li><a href="#"><span>🍽️</span> מה אוכלים?</a></li>
-            <li><a href="#"><span>❓</span> שאלות נוספות</a></li>
+            <li><a href="#" id="faq-toggle"><span>❓</span> שאלות נוספות</a></li>
+        </ul>
+        <ul class="faq-list" id="faq-list">
+            <li class="faq-item">
+                <div class="faq-question">האם האיזור בטוח לשהות?</div>
+                <div class="faq-answer">
+                    איזור מגדל אינו קו עימות. לעיתים רחוקות יש אזעקה. חשוב לציין שכל המפונים נמצאים באיזור זה ולכן נחשב
+                    בטוח.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">מה עושים אם יש אזעקה?</div>
+                <div class="faq-answer">
+                    יש בכל הוילות ממ"ד גדול לביטחון האורחים.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">האם האירוח כולל שתיה חמה וכיבוד קל?</div>
+                <div class="faq-answer">
+                    האירוח אינו כולל ארוחת בוקר או כיבוד, אך ניתן להוסיף ארוחת בוקר בתוספת תשלום.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">האם מתאים לשומרי כשרות?</div>
+                <div class="faq-answer">
+                    כן, יש כלים מזכוכית כמו צלחות וכוסות שניתן להשתמש מבחינת כשרות.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">האם מתאים לשומרי שבת?</div>
+                <div class="faq-answer">
+                    כן, הוילה מתאימה לציבור הדתי ויש בית כנסת במרחק 200 מטר מהוילה.
+                </div>
+            </li>
+            <li class="faq-item">
+                <div class="faq-question">האם מתאים לבעלי חיים?</div>
+                <div class="faq-answer">
+                    כן, אנו מאפשרים להכניס בעלי חיים.
+                </div>
+            </li>
         </ul>
     </div>
+
 
     <div class="backdrop"></div>
 
@@ -606,10 +706,9 @@
                     <div class="villa-features">
                         <span>4 חדרים</span>
                         <span>•</span>
-                        <span>עד 16 אורחים</span>
+                        <span>מושבה מגדל</span>
                     </div>
-                    <p class="villa-description">וילה מפוארת במושבה מגדל עם בריכה מחוממת, ג'קוזי ספא ונוף מרהיב לכנרת.
-                    </p>
+                    <p class="villa-description">וילה מפוארת במושבה מגדל על הכנרת.</p>
                     <a href="./boxter.html" class="cta-button">לפרטים נוספים</a>
                 </div>
             </article>
@@ -625,9 +724,9 @@
                     <div class="villa-features">
                         <span>5 חדרים</span>
                         <span>•</span>
-                        <span>נוף לכנרת</span>
+                        <span>מושבה מגדל</span>
                     </div>
-                    <p class="villa-description">וילה מפוארת במושבה מגדל על הכנרת, מושלמת לאירוח משפחות וקבוצות.</p>
+                    <p class="villa-description">וילה מפוארת במושבה מגדל על הכנרת.</p>
                     <a href="./crera.html" class="cta-button">לפרטים נוספים</a>
                 </div>
             </article>
@@ -641,11 +740,11 @@
                 <div class="villa-content">
                     <h3 class="villa-title">וילה יהלי</h3>
                     <div class="villa-features">
-                        <span>3 חדרים</span>
+                        <span>6 חדרים</span>
                         <span>•</span>
-                        <span>כלנית</span>
+                        <span>נוף כנרת</span>
                     </div>
-                    <p class="villa-description">וילה קסומה בכלנית, מושלמת לחופשה משפחתית או זוגית באווירה כפרית.</p>
+                    <p class="villa-description">וילה קסומה עם נוף לכנרת.</p>
                     <a href="./yahli.html" class="cta-button">לפרטים נוספים</a>
                 </div>
             </article>
@@ -661,9 +760,9 @@
                     <div class="villa-features">
                         <span>3 חדרים</span>
                         <span>•</span>
-                        <span>כלנית</span>
+                        <span>נוף כנרת</span>
                     </div>
-                    <p class="villa-description">וילה קסומה בכלנית, מושלמת לחופשה משפחתית או זוגית באווירה כפרית.</p>
+                    <p class="villa-description">וילה מבודדת עם נוף לכנרת.</p>
                     <a href="./topanta.html" class="cta-button">לפרטים נוספים</a>
                 </div>
             </article>
@@ -677,12 +776,29 @@
                 <div class="villa-content">
                     <h3 class="villa-title">וילה פנמרה</h3>
                     <div class="villa-features">
-                        <span>3 חדרים</span>
+                        <span>6 חדרים</span>
                         <span>•</span>
-                        <span>כלנית</span>
+                        <span>מושבה מגדל</span>
                     </div>
-                    <p class="villa-description">וילה קסומה בכלנית, מושלמת לחופשה משפחתית או זוגית באווירה כפרית.</p>
+                    <p class="villa-description">וילה מפוארת במושבה מגדל על הכנרת.</p>
                     <a href="./pnamera.html" class="cta-button">לפרטים נוספים</a>
+                </div>
+            </article>
+
+            <!-- וילה טריפל -->
+            <article class="villa-card">
+                <div class="villa-image">
+                    <img src="https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/nofeshglililogo.jpg"
+                        alt=">וילה טריפל">
+                </div>
+                <div class="villa-content">
+                    <h3 class="villa-title">וילה טריפל</h3>
+                    <div class="villa-features">
+                        <span>15 חדרים</span>
+                        <span>•</span>
+                        <span>3 בריכות</span>
+                    </div>
+                    <p class="villa-description">מתחם מדהים המשלב 3 וילות יחד - וילה קררה, וילה פנמרה ווילה בוקסטר.</p>
                 </div>
             </article>
         </section>
@@ -734,6 +850,12 @@
             duration: 1000,
             once: true,
             offset: 100
+        });
+
+        document.getElementById('faq-toggle').addEventListener('click', function (e) {
+            e.preventDefault();
+            const faqList = document.getElementById('faq-list');
+            faqList.classList.toggle('active');
         });
 
         // Menu functionality
