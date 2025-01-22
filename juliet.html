@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="he">
+
+<head>
+    <meta charset="UTF-8">
+    <title>וילה ג'ולייט - נופש גלילי</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/nofeshglililogo.jpg">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/css/glightbox.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2C3E50;
+            --accent-color: #E67E22;
+            --text-light: #ECF0F1;
+            --text-dark: #2C3E50;
+            --background-light: #F9FAFB;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 10px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .logo-container {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .logo {
+            height: 60px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .back-to-home {
+            position: absolute;
+            left: 20px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home:hover {
+            background: rgba(0, 0, 0, 0.05);
+            transform: translateX(-5px);
+        }
+
+        .back-to-home::before {
+            content: '←';
+            font-size: 1.2rem;
+        }
+
+        .hero-villa {
+            height: 80vh;
+            background-image: url('https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/%D7%92%D7%95%D7%9C%D7%99%D7%99%D7%98/b1c37511-5b6c-484d-8104-c8501b5bdc70.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 40px;
+        }
+
+        .hero-overlay h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        .hero-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 10px;
+            font-size: 1.2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .gallery-container {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 0;
+            position: relative;
+        }
+
+        .gallery.collapsed {
+            max-height: 570px;
+            overflow: hidden;
+        }
+
+        .gallery-overlay {
+            display: none;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 150px;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.95) 70%);
+            z-index: 2;
+        }
+
+        .gallery.collapsed+.gallery-overlay {
+            display: block;
+        }
+
+        .gallery-item {
+            position: relative;
+            height: 250px;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .show-more-button {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .show-more-button:hover {
+            transform: translateX(-50%) translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-top: 0;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 10px;
+            padding-right: 25px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '✓';
+            color: var(--accent-color);
+            position: absolute;
+            right: 0;
+        }
+
+        .attractions-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .attractions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .attraction-item {
+            padding: 20px;
+            border-radius: 10px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+
+        .attraction-item:hover {
+            background: #f0f0f0;
+            transform: translateY(-3px);
+        }
+
+        .attraction-item h4 {
+            margin: 0 0 10px 0;
+            color: var(--accent-color);
+        }
+
+        .map-section {
+            height: 400px;
+            background: #eee;
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .price-section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 40px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .price-table th,
+        .price-table td {
+            padding: 15px;
+            text-align: right;
+            border-bottom: 1px solid #eee;
+        }
+
+        .price-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .contact-section {
+            padding: 40px 20px;
+        }
+
+        .contact-buttons-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-person {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-person-title {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        .contact-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .contact-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            border: 2px solid transparent;
+        }
+
+        .contact-button.phone {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .contact-button.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-button img {
+            width: 24px;
+            height: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-overlay h1 {
+                font-size: 2rem;
+            }
+
+            .hero-details {
+                font-size: 1rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .gallery-item {
+                height: 150px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-buttons-grid {
+                gap: 15px;
+            }
+
+            .contact-person {
+                padding: 15px;
+            }
+
+            .contact-button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+            }
+
+            .contact-buttons {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .show-more-button {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/nofeshglililogo.jpg" alt="נופש גלילי" class="logo">
+        </div>
+        <a href="./NofesGlili.html" class="back-to-home">חזרה לדף הבית</a>
+    </nav>
+
+    <div class="hero-villa">
+        <div class="hero-overlay" data-aos="fade-up">
+            <h1>וילה ג'ולייט</h1>
+            <div class="hero-details">
+                <span>7 חדרי שינה</span>
+                <span>•</span>
+                <span>בריכה מחוממת</span>
+                <span>•</span>
+                <span>ג'קוזי ספא</span>
+                <span>•</span>
+                <span>עד 25 אורחים</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <section class="intro-section" data-aos="fade-up">
+            <h2>על הוילה</h2>
+            <p>מחפשים את החופשה המושלמת? אל תחפשו רחוק יותר מווילה ג'ולייט! הוילה היפהפייה שלנו, השוכנת בגליל העליון עם נוף עוצר נשימה לכנרת, היא המקום האידיאלי לחופשה הבאה שלכם או לצרכי אירוח נוספים. עם שבעה חדרי שינה מרווחים, כולל שניים עם חדרי ילדים, יש מספיק מקום לכל המשפחה. תהנו ממשחקי שולחן כיפיים, מטבחים מאובזרים במלואם בכל קומה, חדרי מגורים נעימים ופינות אוכל אלגנטיות.</p>
+        </section>
+
+        <div class="gallery-container">
+            <div class="gallery collapsed"></div>
+            <div class="gallery-overlay">
+                <button class="show-more-button">הצג את כל התמונות</button>
+            </div>
+        </div>
+
+        <section class="features-grid">
+            <div class="feature-card" data-aos="fade-up">
+                <h3>בריכה וספא</h3>
+                <ul class="feature-list">
+                    <li>בריכת שחייה מחוממת (8X4 מטר)</li>
+                    <li>חימום לטמפרטורה של 34 מעלות</li>
+                    <li>ג'קוזי ספא ל-6 אנשים מקורה</li>
+                    <li>מיטות שיזוף ושמשיות</li>
+                    <li>נוף מרהיב לכנרת</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>חדרי שינה</h3>
+                <ul class="feature-list">
+                    <li>7 חדרי שינה מפוארים</li>
+                    <li>2 חדרי ילדים</li>
+                    <li>3 חדרי רחצה עם מקלחת</li>
+                    <li>מיטות קומתיים בחדרי הילדים</li>
+                    <li>מיזוג אוויר בכל חדר</li>
+                    <li>טלוויזיה בכל חדר</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                <h3>מטבח ואבזור</h3>
+                <ul class="feature-list">
+                    <li>2 מטבחים מאובזרים</li>
+                    <li>2 מקררים</li>
+                    <li>תמי 4</li>
+                    <li>מכונות קפה</li>
+                    <li>תנור וכיריים</li>
+                    <li>2 פינות אוכל מרווחות</li>
+                </ul>
+            </div>
+
+            <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>בידור ופנאי</h3>
+                <ul class="feature-list">
+                    <li>שולחן סנוקר</li>
+                    <li>שולחן פינג פונג</li>
+                    <li>שולחן כדורגל</li>
+                    <li>טרמפולינה לילדים</li>
+                    <li>2 טלוויזיות חכמות 65 אינץ'</li>
+                    <li>WiFi חופשי</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="attractions-section" data-aos="fade-up">
+            <h2>שירותים נוספים</h2>
+            <div class="attractions-grid">
+                <div class="attraction-item">
+                    <h4>פינוקים חינם</h4>
+                    <p>קפסולות קפה, מגבות, ג'ל רחצה</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>לציבור הדתי</h4>
+                    <p>בית כנסת במרחק 400 מטר</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>סטנדרט גבוה</h4>
+                    <p>2 סלונים ו-2 מטבחים מאובזרים</p>
+                </div>
+                <div class="attraction-item">
+                    <h4>אטרקציות</h4>
+                    <p>משחקי שולחן וטרמפולינה</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="map-section" data-aos="fade-up">
+            <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+                src="https://maps.google.com/maps?q=32.9365,35.5431&t=&z=13&ie=UTF8&iwloc=&output=embed">
+            </iframe>
+        </section>
+
+        <section class="price-section" data-aos="fade-up">
+            <h2>מחירים</h2>
+            <p>* המחיר נקבע לפי כמות האורחים</p>
+            <p>* מינימום הזמנה בסופ"ש - 2 לילות</p>
+        </section>
+
+        <section class="contact-section" data-aos="fade-up">
+            <h2>מעוניינים להזמין?</h2>
+            <div class="contact-buttons-grid">
+                <div class="contact-person">
+                    <h3 class="contact-person-title">להזמנות</h3>
+                    <div class="contact-buttons">
+                        <a href="tel:0504488353" class="contact-button phone">
+                            <img src="/api/placeholder/24/24" alt="phone">
+                            050-448-8353
+                        </a>
+                        <a href="https://wa.me/972504488353?text=אני%20מעוניין%20בוילה%20ג'ולייט"
+                            class="contact-button whatsapp">
+                            <img src="/api/placeholder/24/24" alt="whatsapp">
+                            וואטסאפ
+                        </a>
+                    </div>
+                </div>
+
+                <div class="contact-person">
+                    <h3 class="contact-person-title">מנהלת האתר</h3>
+                    <div class="contact-buttons">
+                        <a href="tel:0527464618" class="contact-button phone">
+                            <img src="/api/placeholder/24/24" alt="phone">
+                            052-746-4618
+                        </a>
+                        <a href="https://wa.me/972527464618?text=אני%20מעוניין%20בוילה%20ג'ולייט"
+                            class="contact-button whatsapp">
+                            <img src="/api/placeholder/24/24" alt="whatsapp">
+                            וואטסאפ
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.2.0/js/glightbox.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        const galleryImages = [
+            '01b18211-9809-47d4-aefb-6abe7aa42b93.jpg',
+            '0c650267-d40b-4ad7-acaf-83d780e39708.jpg',
+            '0cca5eab-3e2b-4670-9be7-eb5136ddbd18.jpg',
+            '1c1dff02-9320-4f22-96d3-15b112b2877b.jpg',
+            '4e005f6c-fbcb-423c-8898-81d8eb544108.jpg',
+            '56a04598-2354-4f37-8721-fe1898f32237.jpg',
+            '56d822bc-820b-4057-aa7b-5dbaa1450d83.jpg',
+            '5fd1ed00-d395-471b-a096-add4a738ff1f.jpg',  
+            '810ba8a1-d5fc-4a2f-bd44-1c346809128b.jpg',
+            '81bd6bfd-1c9b-4e9e-aba4-600276f76d58.jpg',
+            'a7e9a726-92bc-4b38-b72c-1c3860b07f85.jpg',
+            'b1c37511-5b6c-484d-8104-c8501b5bdc70.jpg',
+            'b47515ec-a881-4d75-bb49-56dceaa63fb6.jpg',
+            'cf2e3366-efc6-42e7-b88d-bc3d503ea7f0.jpg',
+            'd3670611-3d38-432e-86e2-94d07583fffd.jpg',  
+            'd5d19dd0-b1af-42f4-b254-bfe74f696daf.jpg',
+            'e17446f2-f5cf-44fc-9a8b-ec2aae248dbe.jpg',
+            'eddfcc1a-5fc2-4fbb-9cbd-8fb5c8055bb3.jpg'   
+        ];
+
+        // Create gallery items
+        const galleryContainer = document.querySelector('.gallery');
+        const baseUrl = 'https://brtr.s3.us-east-1.amazonaws.com/nofesh-Glili/גולייט/';
+
+        galleryImages.forEach(imageId => {
+            const imageUrl = baseUrl + imageId;
+            const galleryItem = document.createElement('a');
+            galleryItem.href = imageUrl;
+            galleryItem.classList.add('gallery-item');
+            galleryItem.setAttribute('data-gallery', 'villa-gallery');
+            galleryItem.innerHTML = `<img src="${imageUrl}" alt="וילה ג'ולייט">`;
+            galleryContainer.appendChild(galleryItem);
+        });
+
+        // Show more button functionality
+        const showMoreButton = document.querySelector('.show-more-button');
+        showMoreButton.addEventListener('click', () => {
+            galleryContainer.classList.remove('collapsed');
+            document.querySelector('.gallery-overlay').style.display = 'none';
+        });
+
+        // Initialize GLightbox
+        const lightbox = GLightbox({
+            selector: '[data-gallery]',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true,
+            zoomable: true,
+            draggable: true,
+            openEffect: 'fade',
+            closeEffect: 'fade'
+        });
+    </script>
+</body>
+
+</html>
